@@ -12,5 +12,5 @@ data class ProdutoEntity(
     @ColumnInfo(name = "id_corredor") val idCorredor: Int?,
     @ColumnInfo(name = "nome") val nome: String?,
     @ColumnInfo(name = "quantidade") val quantidade: Int?,
-    @ColumnInfo(name = "marcado") val estaMarcado: Boolean?
+    @ColumnInfo(name = "comprado") val comprado: Boolean
 )

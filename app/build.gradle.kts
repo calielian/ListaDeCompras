@@ -51,6 +51,8 @@ dependencies {
     implementation(libs.androidx.fragment)
     implementation(libs.androidx.room)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
 
     ksp(libs.androidx.room.compiler)
 
