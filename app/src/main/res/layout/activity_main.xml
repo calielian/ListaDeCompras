@@ -17,6 +17,8 @@
         android:id="@+id/botao_split"
         android:layout_width="wrap_content"
         android:layout_height="78dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:layout_gravity="bottom|end">
 
         <Button
