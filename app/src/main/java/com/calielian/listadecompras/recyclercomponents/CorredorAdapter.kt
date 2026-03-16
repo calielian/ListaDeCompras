@@ -7,14 +7,20 @@ import androidx.recyclerview.widget.DiffUtil
 import com.calielian.listadecompras.database.CorredorEntity
 import com.calielian.listadecompras.databinding.CorredorBinding
 
+/*
+    Adapter é um componente do RecyclerView
+    Ponte entre os dados e a interface
+ */
 class CorredorAdapter : ListAdapter<CorredorEntity, CorredorViewHolder>(DiffCallback()) {
     var onItemClick: ((CorredorEntity) -> Unit)? = null
 
+    // infla o layout e retorna o ViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CorredorViewHolder {
         val binding = CorredorBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CorredorViewHolder(binding)
     }
 
+    // entrega um item específico e entrega para o ViewHolder para preencher os dados e ser mostrado
     override fun onBindViewHolder(holder: CorredorViewHolder, posicao: Int) {
         val item = getItem(posicao)
         holder.bind(item)

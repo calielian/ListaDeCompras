@@ -7,13 +7,19 @@ import androidx.recyclerview.widget.ListAdapter
 import com.calielian.listadecompras.database.ProdutoEntity
 import com.calielian.listadecompras.databinding.ProdutoBinding
 
+/*
+    Adapter é um componente do RecyclerView
+    Ponte entre os dados e a interface
+ */
 class ProdutoAdapter(private val onCheckChange: (ProdutoEntity) -> Unit) : ListAdapter<ProdutoEntity, ProdutoViewHolder>(DiffCallback()) {
 
+    // infla o layout e retorna o ViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProdutoViewHolder {
         val binding = ProdutoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ProdutoViewHolder(binding)
     }
 
+    // entrega um item específico e entrega para o ViewHolder para preencher os dados e ser mostrado
     override fun onBindViewHolder(holder: ProdutoViewHolder, posicao: Int) {
         holder.bind(getItem(posicao), onCheckChange)
     }

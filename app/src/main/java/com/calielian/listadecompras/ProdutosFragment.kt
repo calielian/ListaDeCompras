@@ -11,28 +11,39 @@ import com.calielian.listadecompras.databinding.FragmentProdutosBinding
 import com.calielian.listadecompras.recyclercomponents.ProdutoAdapter
 import com.calielian.listadecompras.viewmodels.ProdutoViewModel
 import com.calielian.listadecompras.viewmodels.ProdutoViewModelFactory
+import com.google.android.material.transition.MaterialSharedAxis
 
+/*
+    Fragment é como se fosse uma Activity, mas como um fragmento
+ */
 class ProdutosFragment : Fragment() {
 
     private var _binding: FragmentProdutosBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding!! // o operador !! força _binding a não nulo
+    // é como se apelidasse um getter do _binding de "binding"
+    // além de remover a necessidade do uso de "!!" ou "?" toda vez que fosse acessar o _binding
 
     private var corredorId: Int = -1
 
+    // criação inicial do fragment
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        enterTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
+        returnTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)
 
         arguments?.let {
             corredorId = it.getInt(ARG_CORREDOR_ID)
         }
     }
 
-
+    // view não visível, nem hierarquia criada
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentProdutosBinding.inflate(inflater, container, false)
         return binding.root
     }
 
+    // view visível e hierarquia criada
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -55,6 +66,7 @@ class ProdutosFragment : Fragment() {
         }
     }
 
+    // fragment desacoplado da view onde estava
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

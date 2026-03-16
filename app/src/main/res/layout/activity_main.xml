@@ -13,11 +13,11 @@
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.calielian.listadecompras.CorredorFragment" />
+        android:background="?android:attr/colorBackground" />
 
     <com.google.android.material.button.MaterialSplitButton
         android:layout_width="wrap_content"
-        android:layout_height="78dp"
+        android:layout_height="85dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:layout_gravity="bottom|end">
