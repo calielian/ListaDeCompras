@@ -5,44 +5,78 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-//private const val ARG_PARAM1 = "param1"
-//private const val ARG_PARAM2 = "param2"
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.calielian.listadecompras.databinding.FragmentProdutosBinding
+import com.calielian.listadecompras.recyclercomponents.ProdutoAdapter
+import com.calielian.listadecompras.viewmodels.ProdutoViewModel
 
 class ProdutosFragment : Fragment() {
 
-    /*
+    private var _binding: FragmentProdutosBinding? = null
+    private val binding get() = _binding!!
+
+    private var corredorId: Int = -1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            corredorId = it.getInt(ARG_CORREDOR_ID)
         }
     }
-     */
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_produtos, container, false)
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentProdutosBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val adapter = ProdutoAdapter()
+
+        binding.listaProdutos.apply {
+            this.adapter = adapter
+            this.layoutManager = LinearLayoutManager(requireContext())
+        }
+
+        val app = requireActivity().application as MainApp
+        val viewModel = ProdutoViewModel(app.database.produtoDao())
+
+        viewModel.pegarTodosPorCorredor(corredorId).observe(viewLifecycleOwner) { lista ->
+            adapter.submitList(lista)
+        }
     }
 
-    /*
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProdutosFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
-     */
+
+    companion object { // gera membros que operam como estáticos (não existe static em Kotlin)
+        private const val ARG_CORREDOR_ID = "corredorId"
+
+        // gera um métod0 estático adicional para interoperabilidade com Java
+        //  (ao invés de ProdutosFragment.companion.newInstance, seria ProdutosFragment.newInstance())
+        @JvmStatic
+        fun newInstance(id: Int) = ProdutosFragment().apply { // .apply configura a classe e retorna a instância
+            arguments = Bundle().apply {
+                putInt(ARG_CORREDOR_ID, id)
+            }
+        }
+
+        /*
+            O código acima é equivalente a:
+            fun newInstance(id: Int): ProdutosFragment {
+                val fragment = ProdutosFragment()
+
+                val args = Bundle()
+                args.putInt(ARG_CORREDOR_ID, id)
+                fragment.arguments = args
+
+                return fragment
+            }
+         */
+    }
 }
