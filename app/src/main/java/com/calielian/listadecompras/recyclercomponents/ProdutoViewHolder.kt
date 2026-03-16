@@ -6,13 +6,14 @@ import com.calielian.listadecompras.databinding.ProdutoBinding
 
 class ProdutoViewHolder(private val binding: ProdutoBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(produto: ProdutoEntity) {
+    fun bind(produto: ProdutoEntity, onCheckChanged: (ProdutoEntity) -> Unit) {
         binding.nomeProduto.text = produto.nome
         binding.checkboxComprado.isChecked = produto.comprado
         binding.quantidade.setText(produto.quantidade.toString())
 
         binding.checkboxComprado.setOnCheckedChangeListener { _, isChecked ->
-            binding.checkboxComprado.isChecked = !isChecked
+            val produtoAtualizado = produto.copy(comprado = isChecked)
+            onCheckChanged(produtoAtualizado)
         }
     }
 }

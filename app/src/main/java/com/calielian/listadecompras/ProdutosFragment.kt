@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.calielian.listadecompras.databinding.FragmentProdutosBinding
 import com.calielian.listadecompras.recyclercomponents.ProdutoAdapter
 import com.calielian.listadecompras.viewmodels.ProdutoViewModel
+import com.calielian.listadecompras.viewmodels.ProdutoViewModelFactory
 
 class ProdutosFragment : Fragment() {
 
@@ -34,15 +36,19 @@ class ProdutosFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = ProdutoAdapter()
+        val app = requireActivity().application as MainApp
+
+        val factory = ProdutoViewModelFactory(app.database.produtoDao())
+        val viewModel = ViewModelProvider(this, factory)[ProdutoViewModel::class.java]
+
+        val adapter = ProdutoAdapter { produto ->
+            viewModel.atualizarComprado(produto.id, !produto.comprado)
+        }
 
         binding.listaProdutos.apply {
             this.adapter = adapter
             this.layoutManager = LinearLayoutManager(requireContext())
         }
-
-        val app = requireActivity().application as MainApp
-        val viewModel = ProdutoViewModel(app.database.produtoDao())
 
         viewModel.pegarTodosPorCorredor(corredorId).observe(viewLifecycleOwner) { lista ->
             adapter.submitList(lista)

@@ -8,6 +8,6 @@ import androidx.room.PrimaryKey
     tableName = "Corredor"
 )
 data class CorredorEntity(
-    @PrimaryKey val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @ColumnInfo(name = "nome") val nome: String?
 )

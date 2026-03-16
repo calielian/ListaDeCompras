@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.calielian.listadecompras.database.ProdutoEntity
 import com.calielian.listadecompras.databinding.ProdutoBinding
 
-class ProdutoAdapter : ListAdapter<ProdutoEntity, ProdutoViewHolder>(DiffCallback()) {
+class ProdutoAdapter(private val onCheckChange: (ProdutoEntity) -> Unit) : ListAdapter<ProdutoEntity, ProdutoViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProdutoViewHolder {
         val binding = ProdutoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -15,7 +15,7 @@ class ProdutoAdapter : ListAdapter<ProdutoEntity, ProdutoViewHolder>(DiffCallbac
     }
 
     override fun onBindViewHolder(holder: ProdutoViewHolder, posicao: Int) {
-        holder.bind(getItem(posicao))
+        holder.bind(getItem(posicao), onCheckChange)
     }
 
     // classe que verifica se itens são iguais ou não

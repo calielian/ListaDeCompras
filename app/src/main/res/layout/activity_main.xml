@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     android:id="@+id/main"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -15,7 +16,6 @@
         android:name="com.calielian.listadecompras.CorredorFragment" />
 
     <com.google.android.material.button.MaterialSplitButton
-        android:id="@+id/botao_split"
         android:layout_width="wrap_content"
         android:layout_height="78dp"
         android:layout_marginEnd="16dp"
@@ -24,9 +24,10 @@
 
         <Button
             style="?attr/materialSplitButtonIconFilledStyle"
+            android:id="@+id/botao_adicionar"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/new_corridor"
+            android:text="@string/new_item"
 
             app:icon="@drawable/add"
             app:iconGravity="start"
@@ -34,6 +35,7 @@
 
         <Button
             style="?attr/materialSplitButtonIconFilledStyle"
+            android:id="@+id/botao_outros"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
 

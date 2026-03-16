@@ -8,15 +8,20 @@ import com.calielian.listadecompras.database.CorredorEntity
 import com.calielian.listadecompras.databinding.CorredorBinding
 
 class CorredorAdapter : ListAdapter<CorredorEntity, CorredorViewHolder>(DiffCallback()) {
+    var onItemClick: ((CorredorEntity) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CorredorViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = CorredorBinding.inflate(layoutInflater, parent, false)
+        val binding = CorredorBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CorredorViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: CorredorViewHolder, posicao: Int) {
-        holder.bind(getItem(posicao))
+        val item = getItem(posicao)
+        holder.bind(item)
+
+        holder.itemView.setOnClickListener {
+            onItemClick?.invoke(item)
+        }
     }
 
     // classe que verifica se itens são iguais ou não
