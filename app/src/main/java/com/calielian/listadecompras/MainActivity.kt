@@ -2,10 +2,8 @@ package com.calielian.listadecompras
 
 import android.os.Bundle
 import android.view.View
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -14,7 +12,6 @@ import com.calielian.listadecompras.database.ProdutoEntity
 import com.calielian.listadecompras.databinding.ActivityMainBinding
 import com.calielian.listadecompras.databinding.AlertDialogCorredorNewBinding
 import com.calielian.listadecompras.databinding.AlertDialogProdutoNewBinding
-import com.calielian.listadecompras.databinding.AlertDialogProdutoOperationBinding
 import com.calielian.listadecompras.databinding.LayoutMenuOpcoesBinding
 import com.calielian.listadecompras.viewmodels.CorredorViewModel
 import com.calielian.listadecompras.viewmodels.CorredorViewModelFactory

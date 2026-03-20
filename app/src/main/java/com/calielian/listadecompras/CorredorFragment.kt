@@ -10,9 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.calielian.listadecompras.MainActivity.Companion.corredorId
-import com.calielian.listadecompras.database.ProdutoEntity
 import com.calielian.listadecompras.databinding.AlertDialogCorredorOperationBinding
-import com.calielian.listadecompras.databinding.AlertDialogProdutoNewBinding
 import com.calielian.listadecompras.databinding.FragmentCorredorBinding
 import com.calielian.listadecompras.recyclercomponents.CorredorAdapter
 import com.calielian.listadecompras.viewmodels.CorredorViewModel
@@ -54,7 +52,7 @@ class CorredorFragment : Fragment() {
         val adapter = CorredorAdapter().apply {
             this.onItemClick = { corredor ->
                 val fragment = ProdutosFragment.newInstance(corredor.id)
-                MainActivity.corredorId = corredor.id
+                corredorId = corredor.id
                 parentFragmentManager.beginTransaction()
                     .setReorderingAllowed(true)
                     .replace(R.id.fragment_container, fragment)
