@@ -38,6 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/add_30"
+                    android:contentDescription="@string/add_icon_accessibility"
 
                     app:tint="?attr/colorPrimary" />
 
@@ -52,7 +53,7 @@
                 android:id="@+id/message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Adicionar novo produto"
+                android:text="@string/add_new_product"
                 android:textColor="?attr/colorOnSurface"
 
                 app:layout_constraintTop_toBottomOf="@id/icon_layout"
@@ -92,7 +93,7 @@
                 android:layout_marginEnd="24dp"
                 android:layout_marginTop="24dp"
 
-                android:text="Adicionar"
+                android:text="@string/add"
 
                 app:layout_constraintTop_toBottomOf="@id/product_name_layout"/>
 
@@ -106,7 +107,7 @@
                 android:layout_marginEnd="24dp"
                 android:layout_marginTop="8dp"
 
-                android:text="Cancelar"
+                android:text="@string/cancel"
 
                 app:layout_constraintTop_toBottomOf="@id/salvar" />
 

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--  layout de referência para uso do RecyclerView  -->
 <Button xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     style="@style/Widget.Material3.Button.TextButton"
 
     android:id="@+id/texto_nome_corredor"
@@ -9,8 +8,7 @@
     android:layout_height="wrap_content"
 
 
-    android:text="Nome corredor"
-    android:textSize="24sp"
-    tools:ignore="HardcodedText">
+    android:text="@string/PLACEHOLDER"
+    android:textSize="24sp">
 
 </Button>

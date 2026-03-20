@@ -83,7 +83,7 @@ class ProdutosFragment : Fragment() {
                             viewModel.atualizarNome(produto.id, nome)
                             dialog.dismiss()
                         } else {
-                            Toast.makeText(context, "Produto já existe/nome vazio", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, getString(R.string.product_error), Toast.LENGTH_SHORT).show()
                         }
                     }
                 }

@@ -77,7 +77,7 @@ class CorredorFragment : Fragment() {
                             viewModel.atualizarNome(corredor.id, nome)
                             dialog.dismiss()
                         } else {
-                            Toast.makeText(requireContext(), "Corredor já existe/nome vazio", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), getString(R.string.corridor_error), Toast.LENGTH_SHORT).show()
                         }
                     }
                 }

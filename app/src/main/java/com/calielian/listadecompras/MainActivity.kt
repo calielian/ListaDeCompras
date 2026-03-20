@@ -118,7 +118,7 @@ class MainActivity : AppCompatActivity() {
                     corredorViewModel.inserir(CorredorEntity(nome = nome))
                     dialog.dismiss()
                 } else {
-                    Toast.makeText(this@MainActivity, "Corredor já existe/nome vazio", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, getString(R.string.corridor_error), Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -145,7 +145,7 @@ class MainActivity : AppCompatActivity() {
                     produtoViewModel.inserir(ProdutoEntity(nome = nome, idCorredor = corredorId, quantidade = 1, comprado = false))
                     dialog.dismiss()
                 } else {
-                    Toast.makeText(this@MainActivity, "Produto já existe/nome vazio", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, getString(R.string.product_error), Toast.LENGTH_SHORT).show()
                 }
             }
         }

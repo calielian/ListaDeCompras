@@ -5,4 +5,24 @@
     <string name="new_item">Novo item</string>
     <string name="type_quantity">Quantidade</string>
     <string name="product_operation">Editar produto ou excluir</string>
+    <string name="options">Opções</string>
+    <string name="add_new_corridor">Adicionar novo corredor</string>
+    <string name="add">Adicionar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="add_icon_accessibility">Ícone de soma</string>
+    <string name="corridor_operation">Editar corredor ou excluir</string>
+    <string name="corridor_new_name_hint">Novo nome do corredor</string>
+    <string name="rename">Renomear</string>
+    <string name="delete">Excluir</string>
+    <string name="create_icon_accessibility">Ícone de um lápis</string>
+    <string name="add_new_product">Adicionar novo produto</string>
+    <string name="product_new_name_hint">Novo nome do produto</string>
+    <string name="PLACEHOLDER">Hello World</string>
+    <string name="icon_app_accessibility">Ícone do aplicativo</string>
+    <string name="developed_by">Desenvolvido por Ian Caliel</string>
+    <string name="licence">Aplicativo sob licença GPLv3</string>
+    <string name="corridor_error">Corredor já existe/nome vazio</string>
+    <string name="product_error">Produto já existe/nome vazio</string>
+    <string name="delete_all">Limpar tudo</string>
+    <string name="about">Sobre</string>
 </resources>

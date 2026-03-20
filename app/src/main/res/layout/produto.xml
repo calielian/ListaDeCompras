@@ -16,7 +16,7 @@
         android:id="@+id/nome_produto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nome produto"
+        android:text="@string/PLACEHOLDER"
         android:textSize="16sp"/>
 
     <Space
@@ -30,6 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:hint="@string/type_quantity" />
+        android:hint="@string/type_quantity"
+        android:autofillHints="none" />
 
 </LinearLayout>

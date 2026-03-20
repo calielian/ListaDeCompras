@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_launcher_background"
+        android:contentDescription="@string/icon_app_accessibility"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -35,7 +36,7 @@
         android:id="@+id/developer_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Desenvolvido por Ian Caliel"
+        android:text="@string/developed_by"
 
         app:layout_constraintTop_toBottomOf="@id/name_app"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -45,7 +46,7 @@
         android:id="@+id/version_app"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="VERSAO_APP"
+        android:text="@string/PLACEHOLDER"
         android:textStyle="italic"
 
         app:layout_constraintTop_toBottomOf="@id/developer_name"
@@ -55,7 +56,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Aplicativo sob licença GPLv3"
+        android:text="@string/licence"
         android:textSize="11sp"
         android:textStyle="bold"
 

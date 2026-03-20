@@ -38,6 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/create"
+                    android:contentDescription="@string/create_icon_accessibility"
 
                     app:tint="?attr/colorPrimary" />
 
@@ -78,7 +79,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
-                    android:hint="Novo nome do produto"/>
+                    android:hint="@string/product_new_name_hint"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -92,7 +93,7 @@
                 android:layout_marginEnd="24dp"
                 android:layout_marginTop="24dp"
 
-                android:text="Renomear"
+                android:text="@string/rename"
 
                 app:layout_constraintTop_toBottomOf="@id/product_name_layout"/>
 
@@ -106,7 +107,7 @@
                 android:layout_marginEnd="24dp"
                 android:layout_marginTop="8dp"
 
-                android:text="Excluir"
+                android:text="@string/delete"
 
                 app:layout_constraintTop_toBottomOf="@id/salvar" />
 
@@ -120,7 +121,7 @@
                 android:layout_marginEnd="24dp"
                 android:layout_marginTop="8dp"
 
-                android:text="Cancelar"
+                android:text="@string/cancel"
 
                 app:layout_constraintTop_toBottomOf="@id/delete" />
 
