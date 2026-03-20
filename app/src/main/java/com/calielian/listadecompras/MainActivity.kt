@@ -1,9 +1,12 @@
 package com.calielian.listadecompras
 
 import android.os.Bundle
+import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.PopupMenu
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.calielian.listadecompras.database.CorredorEntity
@@ -12,10 +15,12 @@ import com.calielian.listadecompras.databinding.ActivityMainBinding
 import com.calielian.listadecompras.databinding.AlertDialogCorredorNewBinding
 import com.calielian.listadecompras.databinding.AlertDialogProdutoNewBinding
 import com.calielian.listadecompras.databinding.AlertDialogProdutoOperationBinding
+import com.calielian.listadecompras.databinding.LayoutMenuOpcoesBinding
 import com.calielian.listadecompras.viewmodels.CorredorViewModel
 import com.calielian.listadecompras.viewmodels.CorredorViewModelFactory
 import com.calielian.listadecompras.viewmodels.ProdutoViewModel
 import com.calielian.listadecompras.viewmodels.ProdutoViewModelFactory
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
 
@@ -56,15 +61,47 @@ class MainActivity : AppCompatActivity() {
                 .commit()
         }
 
-        binding.botaoAdicionar.setOnClickListener {
-            val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container) // pega o fragmento
+        binding.fab.setOnClickListener {
+            val bottomSheet = BottomSheetDialog(this)
+            val menuBinding = LayoutMenuOpcoesBinding.inflate(layoutInflater)
+            bottomSheet.setContentView(menuBinding.root)
 
-            // verifica qual fragmento está na tela
-            if (fragment is CorredorFragment) {
-                mostrarDialogoNovoCorredor()
-            } else if (fragment is ProdutosFragment) {
-                mostrarDialogoNovoProduto()
+            menuBinding.navigationView.setNavigationItemSelectedListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.limpar -> {
+                        bottomSheet.dismiss()
+                        true
+                    }
+
+                    R.id.sobre -> {
+                        supportFragmentManager.beginTransaction()
+                            .setReorderingAllowed(true)
+                            .addToBackStack(null)
+                            .replace(R.id.fragment_container, SobreFragment())
+                            .commit()
+                        alternarVisibilidadeFAB()
+                        bottomSheet.dismiss()
+                        true
+                    }
+
+                    R.id.novo_item -> {
+                        val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container) // pega o fragmento atual
+
+                        // verifica qual fragmento está na tela
+                        if (fragment is CorredorFragment) {
+                            mostrarDialogoNovoCorredor()
+                        } else if (fragment is ProdutosFragment) {
+                            mostrarDialogoNovoProduto()
+                        }
+                        bottomSheet.dismiss()
+                        true
+                    }
+
+                    else -> false
+                }
             }
+
+            bottomSheet.show()
         }
     }
 
@@ -121,6 +158,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         dialog.show()
+    }
+
+    fun alternarVisibilidadeFAB() {
+        binding.fab.visibility = if (binding.fab.isVisible) View.INVISIBLE else View.VISIBLE
     }
 
     companion object { // gera membros que operam como estáticos (não existe static em Kotlin)

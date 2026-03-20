@@ -15,33 +15,16 @@
         android:layout_height="match_parent"
         android:background="?android:attr/colorBackground" />
 
-    <com.google.android.material.button.MaterialSplitButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        style="?attr/floatingActionButtonStyle"
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
-        android:layout_height="85dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:layout_gravity="bottom|end">
+        android:layout_gravity="bottom|end"
+        android:text="Opções"
 
-        <Button
-            style="?attr/materialSplitButtonIconFilledStyle"
-            android:id="@+id/botao_adicionar"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/new_item"
-
-            app:icon="@drawable/add"
-            app:iconGravity="start"
-            app:iconPadding="5dp" />
-
-        <Button
-            style="?attr/materialSplitButtonIconFilledStyle"
-            android:id="@+id/botao_outros"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-
-            app:icon="@drawable/arrow_up" />
-
-    </com.google.android.material.button.MaterialSplitButton>
-
+        app:icon="@drawable/settings_cog" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

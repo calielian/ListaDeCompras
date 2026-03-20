@@ -39,7 +39,7 @@ class CorredorFragment : Fragment() {
     }
 
     // view não visível, nem hierarquia criada
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentCorredorBinding.inflate(inflater, container, false)
         return binding.root
     }
