@@ -25,4 +25,7 @@
     <string name="product_error">Produto já existe/nome vazio</string>
     <string name="delete_all">Limpar tudo</string>
     <string name="about">Sobre</string>
+    <string name="irreversible_action">Tem certeza? Isso é irreversível!</string>
+    <string name="exit_corridor_first">Saia do corredor primeiro</string>
+    <string name="yes">Sim</string>
 </resources>

@@ -48,4 +48,11 @@ class ProdutoViewModel(private val dao: ProdutoDAO) : ViewModel() {
         }
     }
 
+    fun deletarTodos() {
+        viewModelScope.launch {
+            dao.deletarTodos()
+            dao.deletarSequencia()
+        }
+    }
+
 }

@@ -19,6 +19,7 @@ import com.calielian.listadecompras.viewmodels.ProdutoViewModel
 import com.calielian.listadecompras.viewmodels.ProdutoViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
 /*
@@ -66,6 +67,29 @@ class MainActivity : AppCompatActivity() {
             menuBinding.navigationView.setNavigationItemSelectedListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.limpar -> {
+                        val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container) // pega o fragmento atual
+
+                        // verifica se o fragmento ProdutosFragment está na tela
+                        if (fragment is ProdutosFragment) {
+                            Snackbar.make(
+                                this,
+                                binding.root,
+                                getString(R.string.exit_corridor_first),
+                                Snackbar.LENGTH_LONG
+                            ).show()
+                            bottomSheet.dismiss()
+                            return@setNavigationItemSelectedListener true
+                        }
+
+                        Snackbar.make(
+                            this,
+                            binding.root,
+                            getString(R.string.irreversible_action),
+                            Snackbar.LENGTH_LONG
+                        ).setAction(getString(R.string.yes)) {
+                            corredorViewModel.deletarTodos()
+                            produtoViewModel.deletarTodos()
+                        }.show()
                         bottomSheet.dismiss()
                         true
                     }

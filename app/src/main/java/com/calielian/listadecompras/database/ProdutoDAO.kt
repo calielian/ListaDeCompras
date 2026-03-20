@@ -30,6 +30,12 @@ interface ProdutoDAO {
     @Delete
     suspend fun deletar(produto: ProdutoEntity)
 
+    @Query("DELETE FROM Produto")
+    suspend fun deletarTodos()
+
+    @Query("DELETE FROM sqlite_sequence WHERE name = 'Produto'")
+    suspend fun deletarSequencia()
+
     @Query("UPDATE Produto SET comprado = :comprado WHERE id = :id")
     suspend fun atualizarComprado(id: Int, comprado: Boolean)
 

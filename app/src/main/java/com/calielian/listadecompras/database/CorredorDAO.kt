@@ -27,6 +27,12 @@ interface CorredorDAO {
     @Delete
     suspend fun deletar(corredor: CorredorEntity)
 
+    @Query("DELETE FROM Corredor")
+    suspend fun deletarTodos()
+
+    @Query("DELETE FROM sqlite_sequence WHERE name = 'Corredor'")
+    suspend fun deletarSequencia()
+
     @Query("UPDATE Corredor SET nome = :nome WHERE id = :id")
     suspend fun atualizarNome(id: Int, nome: String)
 

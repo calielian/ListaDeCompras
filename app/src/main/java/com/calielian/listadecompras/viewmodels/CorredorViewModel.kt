@@ -32,4 +32,11 @@ class CorredorViewModel(private val dao: CorredorDAO) : ViewModel() {
     suspend fun existeCorredor(nome: String): Boolean {
         return dao.existeCorredor(nome)
     }
+
+    fun deletarTodos() {
+        viewModelScope.launch {
+            dao.deletarTodos()
+            dao.deletarSequencia()
+        }
+    }
 }
