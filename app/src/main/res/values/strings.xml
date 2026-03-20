@@ -4,4 +4,5 @@
     <string name="new_product">Novo produto</string>
     <string name="new_item">Novo item</string>
     <string name="type_quantity">Quantidade</string>
+    <string name="product_operation">Editar produto ou excluir</string>
 </resources>

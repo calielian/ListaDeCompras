@@ -5,13 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.calielian.listadecompras.databinding.AlertDialogProdutoOperationBinding
 import com.calielian.listadecompras.databinding.FragmentProdutosBinding
 import com.calielian.listadecompras.recyclercomponents.ProdutoAdapter
 import com.calielian.listadecompras.viewmodels.ProdutoViewModel
 import com.calielian.listadecompras.viewmodels.ProdutoViewModelFactory
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.transition.MaterialSharedAxis
+import kotlinx.coroutines.launch
 
 /*
     Fragment é como se fosse uma Activity, mas como um fragmento
@@ -52,8 +57,48 @@ class ProdutosFragment : Fragment() {
         val factory = ProdutoViewModelFactory(app.database.produtoDao())
         val viewModel = ViewModelProvider(this, factory)[ProdutoViewModel::class.java]
 
-        val adapter = ProdutoAdapter { produto ->
-            viewModel.atualizarComprado(produto.id, !produto.comprado)
+        val adapter = ProdutoAdapter().apply {
+            this.onCheckChange = { produto ->
+                viewModel.atualizarComprado(produto.id, produto.comprado)
+            }
+
+            this.onValueChange = { produto ->
+                viewModel.atualizarQuantidade(produto.id, produto.quantidade!!)
+            }
+
+            this.onLongClick = { produto ->
+                val dialogBinding = AlertDialogProdutoOperationBinding.inflate(layoutInflater)
+
+                val dialog = MaterialAlertDialogBuilder(requireContext())
+                    .setView(dialogBinding.root)
+                    .create()
+
+                dialogBinding.productName.setText(produto.nome)
+
+                dialogBinding.salvar.setOnClickListener {
+                    lifecycleScope.launch {
+                        val nome = dialogBinding.productName.text.toString()
+
+                        if (nome.isNotEmpty() && nome != produto.nome && !viewModel.existeProduto(nome)) {
+                            viewModel.atualizarNome(produto.id, nome)
+                            dialog.dismiss()
+                        } else {
+                            Toast.makeText(context, "Produto já existe/nome vazio", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+
+                dialogBinding.delete.setOnClickListener {
+                    viewModel.deletar(produto)
+                    dialog.dismiss()
+                }
+
+                dialogBinding.cancelar.setOnClickListener {
+                    dialog.dismiss()
+                }
+
+                dialog.show()
+            }
         }
 
         binding.listaProdutos.apply {

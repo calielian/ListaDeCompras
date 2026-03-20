@@ -30,15 +30,21 @@ class ProdutoViewModel(private val dao: ProdutoDAO) : ViewModel() {
         }
     }
 
-    fun atualizarComprado(id: Int, marcado: Boolean) {
+    fun atualizarComprado(id: Int, comprado: Boolean) {
         viewModelScope.launch {
-            dao.atualizarComprado(id, marcado)
+            dao.atualizarComprado(id, comprado)
         }
     }
 
     fun atualizarNome(id: Int, nome: String) {
         viewModelScope.launch {
             dao.atualizarNome(id, nome)
+        }
+    }
+
+    fun atualizarQuantidade(id: Int, quantidade: Int) {
+        viewModelScope.launch {
+            dao.atualizarQuantidade(id, quantidade)
         }
     }
 

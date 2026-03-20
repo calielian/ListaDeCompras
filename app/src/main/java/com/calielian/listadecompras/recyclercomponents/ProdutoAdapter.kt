@@ -11,7 +11,12 @@ import com.calielian.listadecompras.databinding.ProdutoBinding
     Adapter é um componente do RecyclerView
     Ponte entre os dados e a interface
  */
-class ProdutoAdapter(private val onCheckChange: (ProdutoEntity) -> Unit) : ListAdapter<ProdutoEntity, ProdutoViewHolder>(DiffCallback()) {
+class ProdutoAdapter() : ListAdapter<ProdutoEntity, ProdutoViewHolder>(DiffCallback()) {
+
+    var onValueChange: ((ProdutoEntity) -> Unit)? = null
+    var onCheckChange: ((ProdutoEntity) -> Unit)? = null
+    var onLongClick: ((ProdutoEntity) -> Unit)? = null
+
 
     // infla o layout e retorna o ViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProdutoViewHolder {
@@ -21,7 +26,7 @@ class ProdutoAdapter(private val onCheckChange: (ProdutoEntity) -> Unit) : ListA
 
     // entrega um item específico e entrega para o ViewHolder para preencher os dados e ser mostrado
     override fun onBindViewHolder(holder: ProdutoViewHolder, posicao: Int) {
-        holder.bind(getItem(posicao), onCheckChange)
+        holder.bind(getItem(posicao), onCheckChange!!, onValueChange!!, onLongClick!!)
     }
 
     // classe que verifica se itens são iguais ou não

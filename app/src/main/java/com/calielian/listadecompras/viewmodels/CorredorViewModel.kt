@@ -19,6 +19,17 @@ class CorredorViewModel(private val dao: CorredorDAO) : ViewModel() {
     fun deletar(corredor: CorredorEntity) {
         viewModelScope.launch {
             dao.deletar(corredor)
+            dao.deletarTodosProdutosPorCorredor(corredor.id)
         }
+    }
+
+    fun atualizarNome(id: Int, nome: String) {
+        viewModelScope.launch {
+            dao.atualizarNome(id, nome)
+        }
+    }
+
+    suspend fun existeCorredor(nome: String): Boolean {
+        return dao.existeCorredor(nome)
     }
 }

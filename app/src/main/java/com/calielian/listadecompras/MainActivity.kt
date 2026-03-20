@@ -2,16 +2,22 @@ package com.calielian.listadecompras
 
 import android.os.Bundle
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.calielian.listadecompras.database.CorredorEntity
 import com.calielian.listadecompras.database.ProdutoEntity
 import com.calielian.listadecompras.databinding.ActivityMainBinding
+import com.calielian.listadecompras.databinding.AlertDialogCorredorNewBinding
+import com.calielian.listadecompras.databinding.AlertDialogProdutoNewBinding
+import com.calielian.listadecompras.databinding.AlertDialogProdutoOperationBinding
 import com.calielian.listadecompras.viewmodels.CorredorViewModel
 import com.calielian.listadecompras.viewmodels.CorredorViewModelFactory
 import com.calielian.listadecompras.viewmodels.ProdutoViewModel
 import com.calielian.listadecompras.viewmodels.ProdutoViewModelFactory
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.launch
 
 /*
     Classe da Activity "activity_main.xml" (conforme definido na própria activity)
@@ -63,36 +69,58 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun mostrarDialogoNovoCorredor() {
-        val input = EditText(this)
 
-        // Cria um diálogo de alerta
-        MaterialAlertDialogBuilder(this) // contexto que será aberto
-            .setTitle(getString(R.string.new_corridor)) // título do diálogo
-            .setView(input) // adiciona o EditText ao diálogo
-            .setPositiveButton("Salvar") { _, _ -> // define o texto do botão de confirmação (positivo) e sua ação
-                val nome = input.text.toString()
+        val dialogBinding = AlertDialogCorredorNewBinding.inflate(layoutInflater)
+
+        val dialog = MaterialAlertDialogBuilder(this)
+            .setView(dialogBinding.root)
+            .create()
+
+        dialogBinding.salvar.setOnClickListener {
+            lifecycleScope.launch {
+                val nome = dialogBinding.corridorName.text.toString()
+
                 if (nome.isNotEmpty()) {
                     corredorViewModel.inserir(CorredorEntity(nome = nome))
+                    dialog.dismiss()
+                } else {
+                    Toast.makeText(this@MainActivity, "Corredor já existe/nome vazio", Toast.LENGTH_SHORT).show()
                 }
             }
-            .setNegativeButton("Cancelar", null) // define o texto do botão de negação (negativo) e sua ação
-            .show() // mostra o diálogo
+        }
+
+        dialogBinding.cancelar.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 
     private fun mostrarDialogoNovoProduto() {
-        val input = EditText(this)
+        val dialogBinding = AlertDialogProdutoNewBinding.inflate(layoutInflater)
 
-        MaterialAlertDialogBuilder(this)
-            .setTitle(getString(R.string.new_product))
-            .setView(input)
-            .setPositiveButton("Salvar") { _, _ ->
-                val nome = input.text.toString()
-                if (nome.isNotEmpty()) {
+        val dialog = MaterialAlertDialogBuilder(this)
+            .setView(dialogBinding.root)
+            .create()
+
+        dialogBinding.salvar.setOnClickListener {
+            lifecycleScope.launch {
+                val nome = dialogBinding.productName.text.toString()
+
+                if (nome.isNotEmpty() && !produtoViewModel.existeProduto(nome)) {
                     produtoViewModel.inserir(ProdutoEntity(nome = nome, idCorredor = corredorId, quantidade = 1, comprado = false))
+                    dialog.dismiss()
+                } else {
+                    Toast.makeText(this@MainActivity, "Produto já existe/nome vazio", Toast.LENGTH_SHORT).show()
                 }
             }
-            .setNegativeButton("Cancelar", null)
-            .show()
+        }
+
+        dialogBinding.cancelar.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 
     companion object { // gera membros que operam como estáticos (não existe static em Kotlin)

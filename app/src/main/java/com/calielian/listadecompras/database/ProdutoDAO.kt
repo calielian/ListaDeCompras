@@ -21,7 +21,7 @@ interface ProdutoDAO {
     @Query("SELECT * FROM Produto WHERE id_corredor = :idCorredor")
     fun pegarTodosPorCorredor(idCorredor: Int): Flow<List<ProdutoEntity>>
 
-    @Query("SELECT exists(SELECT 1 FROM Produto WHERE nome = :nome)")
+    @Query("SELECT exists(SELECT 1 FROM Produto WHERE nome = :nome LIMIT 1)")
     suspend fun existeProduto(nome: String): Boolean
 
     @Insert
@@ -36,4 +36,6 @@ interface ProdutoDAO {
     @Query("UPDATE Produto SET nome = :nome WHERE id = :id")
     suspend fun atualizarNome(id: Int, nome: String)
 
+    @Query("UPDATE Produto SET quantidade = :quantidade WHERE id = :id")
+    suspend fun atualizarQuantidade(id: Int, quantidade: Int)
 }

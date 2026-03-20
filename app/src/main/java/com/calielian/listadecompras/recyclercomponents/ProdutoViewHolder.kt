@@ -11,7 +11,7 @@ import com.calielian.listadecompras.databinding.ProdutoBinding
  */
 class ProdutoViewHolder(private val binding: ProdutoBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(produto: ProdutoEntity, onCheckChanged: (ProdutoEntity) -> Unit) {
+    fun bind(produto: ProdutoEntity, onCheckChanged: (ProdutoEntity) -> Unit, onValueChanged: (ProdutoEntity) -> Unit, onLongClick: (ProdutoEntity) -> Unit) {
         binding.nomeProduto.text = produto.nome
         binding.checkboxComprado.isChecked = produto.comprado
         binding.quantidade.setText(produto.quantidade.toString())
@@ -19,6 +19,19 @@ class ProdutoViewHolder(private val binding: ProdutoBinding) : RecyclerView.View
         binding.checkboxComprado.setOnCheckedChangeListener { _, isChecked ->
             val produtoAtualizado = produto.copy(comprado = isChecked)
             onCheckChanged(produtoAtualizado)
+        }
+
+        binding.quantidade.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                val novaQuantidade = binding.quantidade.text.toString().toIntOrNull() ?: 0
+                val produtoAtualizado = produto.copy(quantidade = novaQuantidade)
+                onValueChanged(produtoAtualizado)
+            }
+        }
+
+        binding.root.setOnLongClickListener {
+            onLongClick(produto)
+            true
         }
     }
 }

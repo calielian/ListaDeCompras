@@ -13,6 +13,7 @@ import com.calielian.listadecompras.databinding.CorredorBinding
  */
 class CorredorAdapter : ListAdapter<CorredorEntity, CorredorViewHolder>(DiffCallback()) {
     var onItemClick: ((CorredorEntity) -> Unit)? = null
+    var onItemLongClick: ((CorredorEntity) -> Unit)? = null
 
     // infla o layout e retorna o ViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CorredorViewHolder {
@@ -27,6 +28,11 @@ class CorredorAdapter : ListAdapter<CorredorEntity, CorredorViewHolder>(DiffCall
 
         holder.itemView.setOnClickListener {
             onItemClick?.invoke(item)
+        }
+
+        holder.itemView.setOnLongClickListener {
+            onItemLongClick?.invoke(item)
+            true
         }
     }
 

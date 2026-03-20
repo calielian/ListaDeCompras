@@ -35,7 +35,7 @@ abstract class ListaDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext, // recebe o contexto do aplicativo e não da activity para sobreviver caso as telas forem fechadas
                     ListaDatabase::class.java, // a classe que define o banco de dados
-                    "lista_comptas_db" // nome do arquivo .db no celular
+                    "lista_compras.db" // nome do arquivo .db no celular
                 ).build() // cria a instância
                 INSTANCE = instance
                 // salva a instância nova na variável global INSTANCE, para que o operador Elvis possa retornar a instância já criada

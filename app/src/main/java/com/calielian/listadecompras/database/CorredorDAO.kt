@@ -26,4 +26,13 @@ interface CorredorDAO {
 
     @Delete
     suspend fun deletar(corredor: CorredorEntity)
+
+    @Query("UPDATE Corredor SET nome = :nome WHERE id = :id")
+    suspend fun atualizarNome(id: Int, nome: String)
+
+    @Query("SELECT exists(SELECT 1 FROM Corredor WHERE nome = :nome LIMIT 1)")
+    suspend fun existeCorredor(nome: String): Boolean
+
+    @Query("DELETE FROM Produto WHERE id_corredor = :idCorredor")
+    suspend fun deletarTodosProdutosPorCorredor(idCorredor: Int)
 }
