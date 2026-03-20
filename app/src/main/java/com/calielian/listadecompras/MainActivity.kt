@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 val nome = dialogBinding.corridorName.text.toString()
 
-                if (nome.isNotEmpty()) {
+                if (nome.isNotEmpty() && !corredorViewModel.existeCorredor(nome)) {
                     corredorViewModel.inserir(CorredorEntity(nome = nome))
                     dialog.dismiss()
                 } else {
